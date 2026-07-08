@@ -41,7 +41,7 @@ runtime_common = [
   "openai==2.6.1",
   "openai-harmony==0.0.4",
   "orjson",
-  "outlines==0.1.11",
+  "outlines",
   "packaging",
   "partial_json_parser",
   "pillow",
