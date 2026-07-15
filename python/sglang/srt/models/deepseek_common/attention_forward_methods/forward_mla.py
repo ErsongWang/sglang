@@ -901,10 +901,10 @@ class DeepseekMLAForwardMixin:
                         )
                 else:
                     attn_bmm_output = _bmm_buf.flatten(1, 2)
-            elif self.o_proj.weight.dtype == torch.uint8:
+            elif _use_aiter_gfx95 and self.o_proj.weight.dtype == torch.uint8:
                 attn_bmm_output = attn_bmm_output.transpose(0, 1)
                 attn_bmm_output = fused_flatten_mxfp4_quant(attn_bmm_output)
-            elif self.o_proj.weight.dtype == torch.float8_e4m3fn:
+            elif _use_aiter_gfx95 and self.o_proj.weight.dtype == torch.float8_e4m3fn:
                 attn_bmm_output = attn_bmm_output.transpose(0, 1)
                 attn_bmm_output = fused_flatten_fp8_group_quant(
                     attn_bmm_output,
